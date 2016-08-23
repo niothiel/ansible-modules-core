@@ -94,9 +94,9 @@ EXAMPLES = '''
 # Basic task example
 - name: launch ansible cloudformation example
   cloudformation:
-    stack_name: "ansible-cloudformation" 
+    stack_name: "ansible-cloudformation"
     state: "present"
-    region: "us-east-1" 
+    region: "us-east-1"
     disable_rollback: true
     template: "files/cloudformation-example.json"
     template_parameters:
@@ -110,9 +110,9 @@ EXAMPLES = '''
 # Basic role example
 - name: launch ansible cloudformation example
   cloudformation:
-    stack_name: "ansible-cloudformation" 
+    stack_name: "ansible-cloudformation"
     state: "present"
-    region: "us-east-1" 
+    region: "us-east-1"
     disable_rollback: true
     template: "roles/cloudformation/files/cloudformation-example.json"
     template_parameters:
@@ -263,7 +263,7 @@ def main():
 
     if module.params['template'] is None and module.params['template_url'] is None:
         if state == 'present':
-            module.fail_json('Module parameter "template" or "template_url" is required if "state" is "present"')
+            module.fail_json(msg='Module parameter "template" or "template_url" is required if "state" is "present"')
 
     if module.params['template'] is not None:
         template_body = open(module.params['template'], 'r').read()
@@ -362,7 +362,7 @@ def main():
         for output in stack.outputs:
             stack_outputs[output.key] = output.value
         result['stack_outputs'] = stack_outputs
-        stack_resources = [] 
+        stack_resources = []
         for res in cfn.list_stack_resources(stack_name):
             stack_resources.append({
                 "last_updated_time": res.last_updated_time,
